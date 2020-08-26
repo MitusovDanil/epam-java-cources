@@ -8,7 +8,6 @@ public class Task004Impl implements Task004 {
         if (isNullable(first, second)) {
             throw new IllegalArgumentException();
         }
-
         Set<String> firstSet =
                 new LinkedHashSet<>(Arrays.asList(first));
         Set<String> secondSet =
@@ -26,7 +25,6 @@ public class Task004Impl implements Task004 {
         if (isNullable(first, second)) {
             throw new IllegalArgumentException();
         }
-
         Set<String> firstSet =
                 new LinkedHashSet<>(Arrays.asList(first));
         Set<String> secondSet =
