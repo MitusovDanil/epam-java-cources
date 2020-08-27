@@ -37,7 +37,9 @@ public class Task010Impl implements Task010 {
             e.printStackTrace();
         }
         return new ArrayList<>(Arrays.asList(
-                text.toLowerCase().split("\\W+"))
+                Objects.requireNonNull(text)
+                        .toLowerCase()
+                        .split("\\W+"))
         );
     }
 }
