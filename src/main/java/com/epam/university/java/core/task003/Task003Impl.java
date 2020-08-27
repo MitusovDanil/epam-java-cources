@@ -18,14 +18,11 @@ public class Task003Impl implements Task003 {
 
     @Override
     public String[] join(String[] first, String[] second) {
-        if (isNullable(first, second)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(first, second);
         String[] merged = Arrays
-                .copyOf(first,
-                        first.length + second.length);
-        System.arraycopy(second, 0, merged,
-                first.length, second.length);
+                .copyOf(first, first.length + second.length);
+        System
+                .arraycopy(second, 0, merged, first.length, second.length);
 
         return merged;
     }
@@ -42,10 +39,7 @@ public class Task003Impl implements Task003 {
 
     @Override
     public String[] filter(String[] source, FilteringCondition condition) {
-
-        if (isNullable(source, condition)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(source, condition);
         return Arrays.stream(source)
                 .filter(s -> s.length() > 3)
                 .toArray(String[]::new);
@@ -53,9 +47,7 @@ public class Task003Impl implements Task003 {
 
     @Override
     public String[] removeElements(String[] source, String[] toRemote) {
-        if (isNullable(source, toRemote)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(source, toRemote);
         List<String> sourceList = Arrays
                 .stream(source)
                 .distinct()
@@ -68,9 +60,7 @@ public class Task003Impl implements Task003 {
 
     @Override
     public String[] map(String[] source, MappingOperation operation) {
-        if (isNullable(source, operation)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(source, operation);
         return Arrays.stream(source)
                 .map(StringBuilder::new)
                 .map(StringBuilder::reverse)
@@ -80,9 +70,7 @@ public class Task003Impl implements Task003 {
 
     @Override
     public String[] flatMap(String[] source, FlatMappingOperation operation) {
-        if (isNullable(source, operation)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(source, operation);
         return new Scanner(Arrays.toString(source))
                 .findAll(Pattern.compile("\\d+"))
                 .map(MatchResult::group)
@@ -93,7 +81,9 @@ public class Task003Impl implements Task003 {
                 .toArray(String[]::new);
     }
 
-    private static <T> boolean isNullable(String[] first, T second) {
-        return (first == null) || (second == null);
+    private static <T> void ifNullThrowException(T first, T second) {
+        if (first == null || second == null) {
+            throw new IllegalArgumentException();
+        }
     }
 }

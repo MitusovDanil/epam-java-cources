@@ -2,6 +2,7 @@ package com.epam.university.java.core.task011;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.LinkedList;
 
 
@@ -15,9 +16,7 @@ public class Task011Impl implements Task011 {
 
     @Override
     public String getLastName(ArrayList<String> collection) {
-        if (collection == null || collection.size() == 0) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(collection);
         if (collection.size() == 1) {
             return collection.get(0);
         }
@@ -33,5 +32,11 @@ public class Task011Impl implements Task011 {
     public String getLastName(LinkedList<String> collection) {
         ArrayList<String> list = new ArrayList<>(collection);
         return getLastName(list);
+    }
+
+    private static <T> void ifNullThrowException(Collection<T> col) {
+        if (col == null || col.size() == 0) {
+            throw new IllegalArgumentException();
+        }
     }
 }

@@ -5,9 +5,7 @@ import java.util.*;
 public class Task004Impl implements Task004 {
     @Override
     public String[] intersection(String[] first, String[] second) {
-        if (isNullable(first, second)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(first, second);
         Set<String> firstSet =
                 new LinkedHashSet<>(Arrays.asList(first));
         Set<String> secondSet =
@@ -22,9 +20,7 @@ public class Task004Impl implements Task004 {
 
     @Override
     public String[] union(String[] first, String[] second) {
-        if (isNullable(first, second)) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(first, second);
         Set<String> firstSet =
                 new LinkedHashSet<>(Arrays.asList(first));
         Set<String> secondSet =
@@ -35,7 +31,10 @@ public class Task004Impl implements Task004 {
         return firstSet.toArray(new String[]{});
     }
 
-    private static <T> boolean isNullable(T first, T second) {
-        return (first == null) || (second == null);
+    private static <T> void ifNullThrowException(T first, T second) {
+        if (first == null || second == null) {
+            throw new IllegalArgumentException();
+        }
     }
 }
+

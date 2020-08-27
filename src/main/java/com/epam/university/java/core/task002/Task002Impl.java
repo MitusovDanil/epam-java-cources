@@ -3,13 +3,11 @@ package com.epam.university.java.core.task002;
 import java.util.Arrays;
 
 
-
 public class Task002Impl implements Task002 {
     @Override
     public boolean isEquals(String firstString, String secondString) {
-        if (firstString == null || secondString == null) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(firstString, secondString);
+
         return firstString.equals(secondString);
     }
 
@@ -26,9 +24,8 @@ public class Task002Impl implements Task002 {
 
     @Override
     public String left(String sourceString, String separator) {
-        if (sourceString == null || separator == null) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(sourceString, separator);
+
         return sourceString.split(separator)[0];
     }
 
@@ -49,17 +46,15 @@ public class Task002Impl implements Task002 {
 
     @Override
     public String right(String sourceString, String separator) {
-        if (sourceString == null || separator == null) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(sourceString, separator);
+
         String spacesFreeSource = sourceString
                 .replaceAll(" ", "");
         String spacesFreeSeparator = separator
                 .replaceAll(" ", "");
 
-        if (!Arrays
-                .asList(spacesFreeSource.split(""))
-                .contains(spacesFreeSeparator)) {
+        if (isSeparatorValid(spacesFreeSource,
+                spacesFreeSeparator)) {
             return sourceString;
         }
 
@@ -69,17 +64,14 @@ public class Task002Impl implements Task002 {
 
     @Override
     public String[] split(String sourceString, String split) {
-        if (sourceString == null || split == null) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(sourceString, split);
         return sourceString.split(split);
     }
 
     @Override
     public String join(String[] sourceCollection, String glue) {
-        if (sourceCollection == null || glue == null) {
-            throw new IllegalArgumentException();
-        }
+        ifNullThrowException(sourceCollection, glue);
+
         if (sourceCollection.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -87,5 +79,16 @@ public class Task002Impl implements Task002 {
             throw new IllegalArgumentException();
         }
         return String.join(glue, sourceCollection);
+    }
+
+    private static <T> void ifNullThrowException(T first, T second) {
+        if (first == null || second == null) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private boolean isSeparatorValid(String sourceString, String separator) {
+        return !Arrays.asList(sourceString.split(""))
+                .contains(separator);
     }
 }
