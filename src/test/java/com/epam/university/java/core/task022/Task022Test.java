@@ -26,7 +26,7 @@ public class Task022Test {
                 instance.maxSum(numbers)
         );
         assertEquals(
-                "Minimum value in incorrect",
+                "Minimum value is incorrect",
                 10,
                 instance.minSum(numbers)
         );
