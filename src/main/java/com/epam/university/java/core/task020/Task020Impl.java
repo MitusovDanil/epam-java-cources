@@ -7,10 +7,9 @@ public class Task020Impl implements Task020 {
     @Override
     public int calculate(Collection<String> stones) {
         Set<String> allLetters = retrieveLettersFromStrings(stones);
+        List<Set<String>> list = toListOfStringSets(stones);
         for (int i = 0; i < stones.size(); i++) {
-            allLetters.retainAll(
-                    toListOfStringSets(stones).get(i)
-            );
+            allLetters.retainAll(list.get(i));
         }
         return allLetters.size();
     }
